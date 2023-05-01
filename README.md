@@ -4,6 +4,18 @@
    2. add @mui library
 
 2. Create Website Layout
+
    1. Add header
    2. Add main
    3. Add footer
+
+3. Connect to Sanity.io
+
+   1. install sanity
+   2. initialize sanity
+   3. create product model
+   4. insert sample data to product model
+
+      in this step i get 3 problem to install sanity solution
+      -1. versine node did not agree with sanity , so i used it sanity @sanity/cli@2.29.3
+      -2. problem number two :file found in plugin "@sanity/base" solution: add "@sanity/base" in env sanity.json

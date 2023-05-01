@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "project": {
+    "name": "Sanity_eco_shop_1"
+  },
+  "api": {
+    "projectId": "jo6p1dmh",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["@sanity/base"]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    }
+  ]
+}
