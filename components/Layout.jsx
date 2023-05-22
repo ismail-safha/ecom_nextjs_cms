@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Badge,
   Box,
   Container,
   createTheme,
@@ -19,9 +20,16 @@ import { Store } from "../utils/Store";
 
 export default function Layout({ title, description, children }) {
   const { state, dispatch } = useContext(Store);
-  const { darkMode } = state;
+  const { darkMode, cart } = state;
 
   const theme = createTheme({
+    components: {
+      MuiLink: {
+        defaultProps: {
+          underline: "hover",
+        },
+      },
+    },
     typography: {
       h1: {
         fontSize: "1.6rem",
@@ -71,6 +79,20 @@ export default function Layout({ title, description, children }) {
                 checked={darkMode}
                 onChange={darkModeChangeHandler}
               ></Switch>
+              <Link href="cart">
+                <Typography component="span">
+                  {cart.cartItems.length > 0 ? (
+                    <Badge
+                      color="secondary"
+                      badgeContent={cart.cartItems.length}
+                    >
+                      Cart
+                    </Badge>
+                  ) : (
+                    "Cart"
+                  )}
+                </Typography>
+              </Link>
             </Box>
           </Toolbar>
         </AppBar>

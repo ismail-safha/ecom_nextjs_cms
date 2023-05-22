@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { urlForThumbnail } from "../utils/image";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, addToCartHandler }) {
   return (
     <Card>
       <Link href={`/product/${product.slug.current}`}>
@@ -30,7 +30,11 @@ export default function ProductItem({ product }) {
       </Link>
       <CardActions>
         <Typography>${product.price}</Typography>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => addToCartHandler(product)}
+        >
           Add to cart
         </Button>
       </CardActions>
