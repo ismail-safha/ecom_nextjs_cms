@@ -4,6 +4,7 @@ import { CacheProvider } from "@emotion/react";
 
 const clientSideEmotionCache = createCache({ key: "css" });
 import dynamic from "next/dynamic";
+import { StoreProvider } from "../utils/Store";
 
 export default function App({
   Component,
@@ -12,7 +13,9 @@ export default function App({
 }) {
   return (
     <CacheProvider value={emotionCache}>
-      <Component {...pageProps} />
+      <StoreProvider>
+        <Component {...pageProps} />
+      </StoreProvider>
     </CacheProvider>
   );
 }

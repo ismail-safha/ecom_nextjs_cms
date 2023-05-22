@@ -4,6 +4,7 @@ import {
   Container,
   createTheme,
   CssBaseline,
+  Switch,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -11,9 +12,15 @@ import {
 
 import Head from "next/head";
 import Link from "next/link";
+import { useContext } from "react";
 import classes from "../utils/classes";
+import jsCookie from "js-cookie";
+import { Store } from "../utils/Store";
 
 export default function Layout({ title, description, children }) {
+  const { state, dispatch } = useContext(Store);
+  const { darkMode } = state;
+
   const theme = createTheme({
     typography: {
       h1: {
@@ -28,7 +35,7 @@ export default function Layout({ title, description, children }) {
       },
     },
     palette: {
-      mode: "light",
+      mode: darkMode ? "dark" : "light",
       primary: {
         main: "#f0c000",
       },
@@ -37,6 +44,13 @@ export default function Layout({ title, description, children }) {
       },
     },
   });
+
+  const darkModeChangeHandler = () => {
+    dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
+    const newDarkMode = !darkMode;
+    jsCookie.set("darkMode", newDarkMode ? "ON" : "OFF");
+  };
+
   return (
     <>
       <Head>
@@ -47,9 +61,17 @@ export default function Layout({ title, description, children }) {
         <CssBaseline />
         <AppBar position="static" sx={classes.appbar}>
           <Toolbar sx={classes.toolbar}>
-            <Link href="/">
-              <Typography sx={classes.brand}>eco_shop</Typography>
-            </Link>
+            <Box display="flex" alignItems="center">
+              <Link href="/">
+                <Typography sx={classes.brand}>eco_shop</Typography>
+              </Link>
+            </Box>
+            <Box>
+              <Switch
+                checked={darkMode}
+                onChange={darkModeChangeHandler}
+              ></Switch>
+            </Box>
           </Toolbar>
         </AppBar>
         {/* content */}
