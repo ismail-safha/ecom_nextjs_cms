@@ -12,6 +12,7 @@ export default function Home() {
   });
 
   const { loading, error, products } = state;
+  // fetch data from sanity
   useEffect(() => {
     const fetchData = async () => {
       try {
