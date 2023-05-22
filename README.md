@@ -44,6 +44,12 @@
    6. show add to cart button
 
 6. Create React Context use ( package js-cookie to save the selected option of the user)
+
    1. define Context, Store and reducer
    2. set darkMode flag
    3. use it on layout
+
+7. Implement Add to cart
+   1. define cart in context
+   2. dispatch add to cart action
+   3. set click event handler for button

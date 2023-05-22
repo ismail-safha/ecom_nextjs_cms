@@ -3,8 +3,8 @@ import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 
 const clientSideEmotionCache = createCache({ key: "css" });
-import dynamic from "next/dynamic";
 import { StoreProvider } from "../utils/Store";
+import { SnackbarProvider } from "notistack";
 
 export default function App({
   Component,
@@ -13,9 +13,13 @@ export default function App({
 }) {
   return (
     <CacheProvider value={emotionCache}>
-      <StoreProvider>
-        <Component {...pageProps} />
-      </StoreProvider>
+      <SnackbarProvider
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <StoreProvider>
+          <Component {...pageProps} />
+        </StoreProvider>
+      </SnackbarProvider>
     </CacheProvider>
   );
 }
