@@ -26,6 +26,8 @@
       -1. versine node did not agree with sanity , so i used it sanity @sanity/cli@2.29.3
       -2. problem number two :file found in plugin "@sanity/base" solution: add "@sanity/base" in env sanity.json
 
+   5. to run sanity => cd file and run (sanity start)
+
 4. List Products
    1. add localhost:3000 to the CORS origins in sanity
    2. fetch products from sanity
