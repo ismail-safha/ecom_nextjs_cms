@@ -1,3 +1,9 @@
+# ECommerce Website : with Nextjs, MU css and CMS Sanity🌟
+
+<br />
+
+<h3 align="left">▶ Steps to Create</h3><br />
+
 1. Create Next App
 
    1. npx create-next-app
