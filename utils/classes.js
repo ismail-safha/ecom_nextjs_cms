@@ -34,6 +34,10 @@ const classes = {
     fontWeight: "bold",
     fontSize: "1.5rem",
   },
+  navbarButton: {
+    color: "#fff",
+    textTransform: "initial",
+  },
 };
 
 export default classes;

@@ -25,7 +25,16 @@ const handler = async (req, res) => {
         },
       },
     ];
-
+    // fetch user based on the email from the database
+    const existsUser = await client.fetch(
+      `*[_type == "user" && email == $email[0]`,
+      {
+        email: req.body.email,
+      }
+    );
+    if (existsUser) {
+      return res.status(401).send({ message: "Email already exists" });
+    }
     const { data } = await axios.post(
       `https://${projectId}.api.sanity.io/v1/data/mutate/${dataset}?returnIds=true`,
       { mutations: createMutations },
@@ -48,8 +57,8 @@ const handler = async (req, res) => {
     const token = signToken(user);
     res.send({ ...user, token });
   } catch {
-    console.error("Failed to fetch product:", error);
-    res.status(500).json({ error: "Failed to fetch product" });
+    console.error("Failed to fetch register:", error);
+    res.status(500).json({ error: "Failed to fetch register" });
   }
 };
 

@@ -5,9 +5,23 @@ import { Button, List, ListItem, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { useSnackbar } from "notistack";
 import axios from "axios";
+import jsCookie from "js-cookie";
+import { useContext, useEffect } from "react";
+import { Store } from "../utils/Store";
+import { useRouter } from "next/router";
 
 export default function LoginScreen() {
+  const { state, dispatch } = useContext(Store);
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
+  const { userInfo } = state;
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, [router, userInfo]);
+
   const {
     handleSubmit,
     control,

@@ -43,7 +43,11 @@ function reducer(state, action) {
     }
     case "USER_LOGIN":
       return { ...state, userInfo: action.payload };
-
+    case "USER_LOGOUT":
+      return {
+        ...state,
+        userInfo: null,
+      };
     default:
       return state;
   }
