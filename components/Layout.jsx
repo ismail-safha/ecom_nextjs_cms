@@ -95,13 +95,17 @@ export default function Layout({ title, description, children }) {
                 </Typography>
               </Link>
               {userInfo ? (
-                <Link href="/profile">
-                  <>{userInfo.name}</>
-                </Link>
+                <>
+                  <Link href="/profile" style={{ color: "green" }}>
+                    {userInfo.name}
+                  </Link>
+                </>
               ) : (
-                <Link href="/login">
-                  <>Login</>
-                </Link>
+                <>
+                  <Link href="/login" style={{ color: "red" }}>
+                    Login
+                  </Link>
+                </>
               )}
             </Box>
           </Toolbar>
