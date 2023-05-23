@@ -78,8 +78,3 @@
     1. create user model
     2. create user create route api
     3. use it in the register screen
-
-12. Implement User Login API
-    1. create login api
-    2. use login api in login screen
-    3. implement logout
