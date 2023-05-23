@@ -20,7 +20,8 @@ import { Store } from "../utils/Store";
 
 export default function Layout({ title, description, children }) {
   const { state, dispatch } = useContext(Store);
-  const { darkMode, cart } = state;
+  const { darkMode, cart, userInfo } = state;
+  console.log(state);
 
   const theme = createTheme({
     components: {
@@ -93,7 +94,15 @@ export default function Layout({ title, description, children }) {
                   )}
                 </Typography>
               </Link>
-              <Link href="/login">Login</Link>
+              {userInfo ? (
+                <Link href="/profile">
+                  <>{userInfo.name}</>
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <>Login</>
+                </Link>
+              )}
             </Box>
           </Toolbar>
         </AppBar>

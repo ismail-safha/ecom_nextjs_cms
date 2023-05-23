@@ -3,8 +3,25 @@ import Layout from "../components/Layout";
 import Form from "../components/Form";
 import { Button, List, ListItem, TextField, Typography } from "@mui/material";
 import Link from "next/link";
+import { useSnackbar } from "notistack";
+import jsCookie from "js-cookie";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { Store } from "../utils/Store";
+import axios from "axios";
 
 export default function RegisterScreen() {
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, [router, userInfo]);
+
   const {
     handleSubmit,
     control,
@@ -13,16 +30,20 @@ export default function RegisterScreen() {
   //=
 
   const submitHandler = async ({ name, email, password, confirmPassword }) => {
+    if (password !== confirmPassword) {
+      enqueueSnackbar("Passwords don't match", { variant: "error" });
+      return;
+    }
     try {
-      const { data } = await axios.post("/api/users/login", {
+      const { data } = await axios.post("/api/users/register", {
         email,
         password,
       });
       dispatch({ type: "USER_LOGIN", payload: data });
       jsCookie.set("userInfo", JSON.stringify(data));
-      router.push(redirect || "/");
+      router.push("/");
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: "error" });
+      enqueueSnackbar(err, { variant: "error" });
     }
   };
   //=

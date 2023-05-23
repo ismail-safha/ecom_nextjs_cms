@@ -3,8 +3,11 @@ import Layout from "../components/Layout";
 import Form from "../components/Form";
 import { Button, List, ListItem, TextField, Typography } from "@mui/material";
 import Link from "next/link";
+import { useSnackbar } from "notistack";
+import axios from "axios";
 
 export default function LoginScreen() {
+  const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
     control,
@@ -20,9 +23,9 @@ export default function LoginScreen() {
       });
       dispatch({ type: "USER_LOGIN", payload: data });
       jsCookie.set("userInfo", JSON.stringify(data));
-      router.push(redirect || "/");
+      router.push("/");
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: "error" });
+      enqueueSnackbar(err, { variant: "error" });
     }
   };
   //=
